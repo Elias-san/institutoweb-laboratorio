@@ -1,63 +1,25 @@
+import { validationResult } from "express-validator"
 
 const userController = {
     registerUser: (req,res) => {
-        const {nombres, apellidos, dni,email,password,cargo} = req.body
-        const now = new Date()
-        const fecha = now.toLocaleDateString()
 
-        /*
-        nombres, apellidos, DNI,
-         cargo/área del laboratorio al que pertenece, 
-         correo electrónico.
-         */
-        
-        const header = {
-            headers: {
-                "Access-Control-Allow-Headers": "Content-Type",
-                "Access-Control-Allow-Methods": "OPTIONS,POST,GET"
+        try {
+            const {nombres, apellidos, dni,email,password,cargo} = req.body
+            const now = new Date()
+            const fecha = now.toLocaleDateString()
+            let errors = validationResult(req)
+            console.log(errors)
+            if (!errors.isEmpty()){
+                return res.json( {errors: errors.array()})
+                //return res.json(msg)
+            } else {
+                return res.json(req)
             }
+           
+
+        } catch (error) {
+            console.log(error)
         }
-
-        let error = false;
-        let respuesta = {header}
-        if(!nombres) {
-            error=true
-            respuesta = {...{status:403,error:"Debe ingresar Nombres"}}
-        }
-
-        if(!apellidos) {
-            error=true
-            respuesta = {...{status:403,error:"Debe ingresar Apellido"}}
-        } 
-
-        if(!dni) {
-            error=true
-            respuesta = {...{status:403,error:"Debe ingresar DNI"}}
-        } 
-
-        if(!cargo) {
-            error=true
-            respuesta = {...{status:403,error:"Debe ingresar Cargo"}}
-        } 
-
-       
-        if(!email) {
-            error=true
-            respuesta = {...{status:403,error:"Debe ingresar un correo"}}
-        } 
-
-        if(!password) {
-            error=true
-            respuesta = {...{status:403,error:"Debe ingresar una password"}}
-        } 
-        
-        if (!error) {
-            respuesta = {...{status:200,msg:"Todos los datos estan completos"}}
-            res.json(respuesta)
-            const datos = {...req.body ,"fecha":`${fecha}`}
-            console.log(datos)
-        }
-
     }
 
 }

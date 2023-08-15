@@ -1,6 +1,6 @@
 import express from "express";
 import  userController from "../controller/userController.js"
-
+import userValidator from '../middleware/userValidator.js'
 
 const routes = express.Router()
 
@@ -15,6 +15,6 @@ routes.post('/login',(req,res)=>{
 })
 
 //Registrar usuario
-routes.post('/register',userController.registerUser)
+routes.post('/register',userValidator,userController.registerUser)
 
 export default routes;
