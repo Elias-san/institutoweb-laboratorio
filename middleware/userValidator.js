@@ -16,11 +16,11 @@ export default [
       }),
     body('cargo').trim()
     .notEmpty().withMessage('Debe completar el campo Cargo'),
+    body('area').trim()
+    .notEmpty().withMessage('Debe completar el campo area'),
     body('email').trim()
     .notEmpty().withMessage('Debe completar el campo email')
     .isEmail()
-    .withMessage('Debe ingresar un correo electrónico válido'),
-    body('password').trim()
-    .notEmpty().withMessage('Debe completar el campo password')
-    .isLength({ min: 8 }).withMessage('La contraseña debe tener 8 caracteres como mínimo')
+    .withMessage('Debe ingresar un correo electrónico válido')
 ]
+
