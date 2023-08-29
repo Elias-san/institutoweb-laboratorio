@@ -1,5 +1,5 @@
 import  { Sequelize, DataTypes } from 'sequelize'
-import db from "../config/db.js"
+import {db} from "../config/db.js"
 import  {Area} from "./Area.js"
 import {Cargo} from "./Cargo.js"
 
@@ -37,11 +37,11 @@ import {Cargo} from "./Cargo.js"
         type: DataTypes.STRING,
         allowNull: false
     },
-    cargoid:{
+    cargo_idcargo:{
         type:DataTypes.INTEGER,
         allowNull:false
     },
-    areaid:{
+    area_idarea:{
         type:DataTypes.INTEGER,
         allowNull:false
     }

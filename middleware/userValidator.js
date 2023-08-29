@@ -14,16 +14,18 @@ export default [
           throw new Error('El DNI no es valido');
         }
       }),
-    body('cargo').trim()
+    body('cargo_idcargo').trim()
     .notEmpty().withMessage('Debe completar el campo Cargo'),
-    body('area').trim()
+    body('area_idarea').trim()
     .notEmpty().withMessage('Debe completar el campo area'),
     body('email').trim()
     .notEmpty().withMessage('Debe completar el campo email')
     .isEmail()
     .withMessage('Debe ingresar un correo electrónico válido'),
-    body('password').trim()
+    body('clave').trim()
     .notEmpty().withMessage('Debe completar el campo clave')
-    .isLength({ min: 8 }).withMessage('La contraseña debe tener 8 caracteres mínimo')
+    .isLength({ min: 8 }).withMessage('La contraseña debe tener 8 caracteres mínimo'),
+    body('encargadoalta').trim()
+    .notEmpty().withMessage('Debe completar el campo encargado de alta')
 ]
 
