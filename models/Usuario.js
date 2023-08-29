@@ -1,7 +1,9 @@
 import  { Sequelize, DataTypes } from 'sequelize'
-import db from '../config/db'
+import db from "../config/db.js"
+import Area from "./Area.js"
+import Cargo from "./Cargo.js"
 
-export const Usuario = db.define('Usuario',{
+ export const Usuario = db.define('Usuario',{
     idusuario:{
         type: DataTypes.INTEGER,
         autoIncrement: true,
@@ -46,12 +48,13 @@ export const Usuario = db.define('Usuario',{
     
 })
 
-Usuario.hasOne('Area',{
+Usuario.hasOne(Areas,{
     foreignKey:'idarea'
 })
 Area.belongTo(Usuario)
 
-Usuario.hasOne('Cargo',{
+Usuario.hasOne(Cargos,{
     foreignKey:'idcargo'
 })
 Cargo.belongTo(Usuario)
+

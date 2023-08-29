@@ -15,6 +15,6 @@ routes.post('/login',(req,res)=>{
 })
 
 //Registrar usuario
-routes.post('/register',userValidator,userController.registerUser)
+routes.post('/registrar',userValidator,userController.registerUser)
 
 export default routes;

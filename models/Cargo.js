@@ -1,6 +1,6 @@
 import { Sequelize,DataTypes } from "sequelize";
 
-export const Cargo = db.define('Cargo',{
+export const Cargo = db.define('Cargos',{
     idcargo:{
         type:DataTypes.INTEGER,
         autoIncrement: true,
@@ -12,3 +12,7 @@ export const Cargo = db.define('Cargo',{
 })
 
 Cargo.belongTo(Usuario)
+
+Usuario.hasOne('Cargo',{
+    foreignKey:'idcargo'
+})

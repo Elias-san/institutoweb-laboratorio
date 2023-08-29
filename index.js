@@ -14,7 +14,7 @@ db.authenticate()
 const port = 3000
 
 //Definir rutas de la API
-app.use('/api/user',userRoutes)
+app.use('/api/usuario',userRoutes)
 app.use('/api/cliente',clienteRoutes)
 app.use('/api/profesional',profesionalRoutes)
 

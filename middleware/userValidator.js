@@ -21,6 +21,9 @@ export default [
     body('email').trim()
     .notEmpty().withMessage('Debe completar el campo email')
     .isEmail()
-    .withMessage('Debe ingresar un correo electrónico válido')
+    .withMessage('Debe ingresar un correo electrónico válido'),
+    body('password').trim()
+    .notEmpty().withMessage('Debe completar el campo clave')
+    .isLength({ min: 8 }).withMessage('La contraseña debe tener 8 caracteres mínimo')
 ]
 

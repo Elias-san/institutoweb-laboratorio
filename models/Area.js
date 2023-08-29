@@ -1,8 +1,8 @@
 
 import {DataTypes, Sequelize} from "sequelize"
-import db from '../config/db'
+import db from "../config/db.js"
 
-export const Area = db.define("Cargo",{
+export const Area = db.define("Areas",{
     idarea:{
         type: DataTypes.INTEGER,
         primarykey: true,
@@ -13,4 +13,5 @@ export const Area = db.define("Cargo",{
     }
 })
 
-Area.BelongTo('Usuario');
+
+
