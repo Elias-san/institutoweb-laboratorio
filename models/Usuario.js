@@ -1,7 +1,7 @@
 import  { Sequelize, DataTypes } from 'sequelize'
 import db from "../config/db.js"
-import Area from "./Area.js"
-import Cargo from "./Cargo.js"
+import  {Area} from "./Area.js"
+import {Cargo} from "./Cargo.js"
 
  export const Usuario = db.define('Usuario',{
     idusuario:{
@@ -48,13 +48,13 @@ import Cargo from "./Cargo.js"
     
 })
 
-Usuario.hasOne(Areas,{
+Usuario.hasOne(Area,{
     foreignKey:'idarea'
 })
-Area.belongTo(Usuario)
+Area.belongsTo(Usuario)
 
-Usuario.hasOne(Cargos,{
+Usuario.hasOne(Cargo,{
     foreignKey:'idcargo'
 })
-Cargo.belongTo(Usuario)
+Cargo.belongsTo(Usuario)
 

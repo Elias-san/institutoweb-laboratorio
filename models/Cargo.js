@@ -1,4 +1,5 @@
 import { Sequelize,DataTypes } from "sequelize";
+import db from "../config/db.js"
 
 export const Cargo = db.define('Cargos',{
     idcargo:{
@@ -9,10 +10,4 @@ export const Cargo = db.define('Cargos',{
     cargo:{
         type: DataTypes.STRING,
     }
-})
-
-Cargo.belongTo(Usuario)
-
-Usuario.hasOne('Cargo',{
-    foreignKey:'idcargo'
 })
