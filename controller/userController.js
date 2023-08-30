@@ -1,6 +1,8 @@
 import {validationResult } from "express-validator"
 import {db} from "../config/db.js"
 import { Usuario } from "../models/Usuario.js"
+import bcrypt from "bcrypt"
+
 const userController = {
     registerUser: async (req,res) => {
             
@@ -19,7 +21,7 @@ const userController = {
 
             //3) Insertar Datos
               try {
-               
+                    req.body.clave =  bcrypt.hashSync(req.body.clave,10)
                     const datos ={...req.body,fechaalta}
                     const nuevoRegistro = await Usuario.create(datos)
                     res.json("Nuevo registro insertado ")
