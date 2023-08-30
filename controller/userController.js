@@ -2,36 +2,60 @@ import {validationResult } from "express-validator"
 import {db} from "../config/db.js"
 import { Usuario } from "../models/Usuario.js"
 import bcrypt from "bcrypt"
+import { where } from "sequelize"
 
-const userController = {
-    registerUser: async (req,res) => {
+ const  registerUser = async (req,res) => {
             
-            const {nombres, apellidos, dni,email,clave,encargadoalta,area,cargo} = req.body
-            const fechaactual = new Date()
-            const fechaalta = fechaactual.toISOString().slice(0, 19).replace('T', ' ');
+    const {nombres, apellidos, dni,email,clave,encargadoalta,area,cargo} = req.body
+    const fechaactual = new Date()
+    const fechaalta = fechaactual.toISOString().slice(0, 19).replace('T', ' ');
 
-            const result = validationResult(req)
-            const errors = result.array()
-           //1) Verificar campos
-            if (errors.length > 0){
-                return res.json( errors.map((error) =>  error.msg))
-            } 
-                 
-            //2) Verificar si existe el DNI
+    const result = validationResult(req)
+    const errors = result.array()
+   //1) Verificar campos
+    if (errors.length > 0){
+        return res.json( errors.map((error) =>  error.msg))
+    } 
+         
+    //2) Verificar si existe el DNI
 
-            //3) Insertar Datos
-              try {
-                    req.body.clave =  bcrypt.hashSync(req.body.clave,10)
-                    const datos ={...req.body,fechaalta}
-                    const nuevoRegistro = await Usuario.create(datos)
-                    res.json("Nuevo registro insertado ")
-              } catch (error){
-                res.json(error)
-              }
-              
-
-    }
+    //3) Insertar Datos
+      try {
+            req.body.clave =  bcrypt.hashSync(req.body.clave,10)
+            const datos ={...req.body,fechaalta}
+            const nuevoRegistro = await Usuario.create(datos)
+            res.json("Nuevo registro insertado ")
+      } catch (error){
+        res.json(error)
+      }
+      
 
 }
+const userLogin = async (req,res) =>{
+const {usuario, clave } = req.body
 
-export default userController;
+const result = validationResult(req)
+    const errors = result.array()
+   //1) Verificar campos
+    if (errors.length > 0){
+        return res.json( errors.map((error) =>  error.msg))
+    } 
+
+    const usuarioOk = await Usuario.findOne({where:{email: usuario}})
+    if (usuarioOk===null){
+      res.json("El usuario no existe")
+    }
+  
+    const claveOk = await bcrypt.compare(clave,usuarioOk.clave)
+    
+    if (claveOk) {
+      res.json("La contraseña es correcta")
+    } else {
+      res.json("La contraseña es incorrecta")
+    }
+}
+
+  
+ export  {registerUser,
+          userLogin}
+  
