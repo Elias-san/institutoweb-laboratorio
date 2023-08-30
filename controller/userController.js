@@ -43,15 +43,16 @@ const result = validationResult(req)
 
     const usuarioOk = await Usuario.findOne({where:{email: usuario}})
     if (usuarioOk===null){
-      res.json("El usuario no existe")
+        return  res.status(400).json({error:true,
+                                  message:"El usuario no existe"})
     }
   
     const claveOk = await bcrypt.compare(clave,usuarioOk.clave)
-    
+
     if (claveOk) {
-      res.json("La contraseña es correcta")
+      return res.status(200).json({error:true,message:`Bienvenido ${usuarioOk.nombres}`})
     } else {
-      res.json("La contraseña es incorrecta")
+      return res.status(400).json({error:true,message:"La contraseña es incorrecta"})
     }
 }
 
