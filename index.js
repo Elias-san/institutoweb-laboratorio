@@ -1,7 +1,7 @@
 import express from "express"
 import {db} from "./config/db.js"
 import userRoutes from "./routes/userRoutes.js"
-import clienteRoutes from "./routes/clienteRoutes.js"
+import pacienteRoutes from "./routes/pacienteRoutes.js"
 import profesionalRoutes from "./routes/profesionalRoutes.js"
 
 const app = express()
@@ -15,13 +15,15 @@ const port = 3000
 
 //Definir rutas de la API
 app.use('/api/usuario',userRoutes)
-app.use('/api/cliente',clienteRoutes)
+app.use('/api/paciente',pacienteRoutes)
 app.use('/api/profesional',profesionalRoutes)
 
-app.get('/', (req,res)=>{
-    res.send('Laboratorio Inicio')
-})
-
+app.use((req, res) => {
+  res.status(404).json({
+    error: true,
+    message: 'Ruta no encontrada'
+  });
+});
 
 
 app.get('/empleado',(req,res)=>{
