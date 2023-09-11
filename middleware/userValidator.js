@@ -1,5 +1,5 @@
 import { body } from "express-validator";
-import { dniValido,dniExiste,correoExiste  } from "./helper/customFunctions.js";
+import { dniValido,dniExiste,correoExiste  } from "./helper/funcionUsuario.js";
 
 export default [
     body('nombres').trim()

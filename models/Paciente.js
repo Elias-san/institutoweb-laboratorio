@@ -1,4 +1,4 @@
-import { DataTypes } from "sequelize"
+import { DataTypes, Sequelize } from "sequelize"
 import { db } from "../config/db.js"
 import {Prestador} from "./Prestador.js"
 
@@ -28,7 +28,7 @@ export const Paciente = db.define('Paciente',{
         type: DataTypes.STRING,
         allowNull:false
     },
-    direccion:{
+    domicilio:{
         type: DataTypes.STRING,
         allowNull:false
     },
@@ -42,10 +42,11 @@ export const Paciente = db.define('Paciente',{
     },
     fechaalta:{
         type: DataTypes.DATE,
-        allowNull:false
+        defaultValue: Sequelize.NOW
+        
     },
     encargadoalta:{
-        type: DataTypes.DATE,
+        type: DataTypes.STRING,
         allowNull:false
     },
     edad:{

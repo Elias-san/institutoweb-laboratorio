@@ -1,4 +1,5 @@
 import { body } from "express-validator"
+import { dniValido,dniExiste,correoExiste  } from "./helper/funcionPaciente.js";
 
 export default [
     body('nombres').trim()
@@ -7,23 +8,19 @@ export default [
     .notEmpty().withMessage('Debe completar el campo Apellidos'),
     body('dni').trim()
     .notEmpty().withMessage('Debe completar el campo DNI')
-    .custom(async value => {
-        const dniPattern = /^[1-9]\d{7}$/;
-        const valido = await dniPattern.test(value)
-        if (!valido) {
-          throw new Error('El DNI no es valido');
-        }
-      }),
+    .custom(dniValido)
+    .custom(dniExiste),
     body('fecha_nac').trim()
     .notEmpty().withMessage('Debe ingesar fecha de nacimiento'),
     body('celular').trim()
     .notEmpty().withMessage('Debe ingesar un celular'),
-    body('direccion').trim()
+    body('domicilio').trim()
     .notEmpty().withMessage('Debe ingesaruna dirección'),
     body('email').trim()
     .notEmpty().withMessage('Debe completar el campo email')
     .isEmail()
-    .withMessage('Debe ingresar un correo electrónico válido'),
+    .withMessage('Debe ingresar un correo electrónico válido')
+    .custom(correoExiste),
     body('nroafiliado').trim()
     .notEmpty().withMessage('Debe ingesar fecha de nacimiento'),
     body('encargadoalta').trim()

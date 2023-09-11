@@ -9,13 +9,11 @@ const registrarPaciente = async (req,res)=>{
     req.body.fecha_nac = parse(req.body.fecha_nac, 'dd-MM-yyyy', new Date());
 
     // Fecha actual
-    const fechaalta = new Date();
+    const fechaActual = new Date();
 
     // Calcular la edad en años
-    const edad = differenceInYears(fechaalta, req.body.fecha_nac);
-
-    console.log(`La edad actual de la persona es ${edad} años.`);
-
+    const edad = differenceInYears(fechaActual, req.body.fecha_nac);
+    
     const result = validationResult(req)
     const errors = result.array()
 
@@ -24,9 +22,9 @@ const registrarPaciente = async (req,res)=>{
     }
 
     try {
-        const datos = {...req.body,edad,fechaalta}
+        const datos = {...req.body,edad}
         const nuevoRegistro = await Paciente.create(datos)
-        res.status(200).json(nuevoRegistro)
+        res.status(200).json("Se ha ingersado un nuevo paciente")
     } catch (error){
         res.status(400).json(error)
     }
