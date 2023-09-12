@@ -4,7 +4,7 @@ const routes = express.Router()
 routes.get('/',(req,res)=>{
     res.send('Profesional')
 })
-routes.get('/clientes',(req,res)=>{
-    res.send('Clientes por profesional')
+routes.get('/pacientes',(req,res)=>{
+    res.send('Pacientes')
 })
 export default routes

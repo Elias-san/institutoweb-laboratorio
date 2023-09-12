@@ -1,6 +1,6 @@
 import express from "express"
 import {db} from "./config/db.js"
-import userRoutes from "./routes/userRoutes.js"
+import personalRoutes from "./routes/personalRoute.js"
 import pacienteRoutes from "./routes/pacienteRoutes.js"
 import profesionalRoutes from "./routes/profesionalRoutes.js"
 
@@ -14,9 +14,9 @@ db.authenticate()
 const port = 3000
 
 //Definir rutas de la API
-app.use('/api/usuario',userRoutes)
-app.use('/api/paciente',pacienteRoutes)
-app.use('/api/profesional',profesionalRoutes)
+app.use('/personal',personalRoutes)
+app.use('/paciente',pacienteRoutes)
+app.use('/profesional',profesionalRoutes)
 
 app.use((req, res) => {
   res.status(404).json({

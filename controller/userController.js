@@ -1,10 +1,9 @@
 import { validationResult } from "express-validator";
-import { db } from "../config/db.js";
 import { Usuario } from "../models/Usuario.js";
 import bcrypt from "bcrypt";
-import { where } from "sequelize";
 
-const registerUser = async (req, res) => {
+
+const registrarUsuario = async (req, res) => {
   const result = validationResult(req);
   const errors = result.array();
 
@@ -22,7 +21,7 @@ const registerUser = async (req, res) => {
     res.json(error);
   }
 };
-const userLogin = async (req, res) => {
+const loginUsuario = async (req, res) => {
   const { usuario, clave } = req.body;
 
   const result = validationResult(req);
@@ -53,4 +52,4 @@ const userLogin = async (req, res) => {
   }
 };
 
-export { registerUser, userLogin };
+export { registrarUsuario, loginUsuario };

@@ -1,5 +1,5 @@
 import express from "express";
-import  { userLogin,registerUser} from "../controller/userController.js"
+import  { loginUsuario,registrarUsuario} from "../controller/userController.js"
 import userValidator from '../middleware/userValidator.js'
 import loginAuth from "../middleware/loginAuth.js";
 
@@ -9,12 +9,13 @@ routes.get('/',(req,res)=>{
     res.json({url:'Usuario'})
 })
 routes.get('/login',(req,res)=>{
-    res.send('Login')
+    res.send('Login Usuario/Personal')
 })
 
-routes.post('/login',loginAuth,userLogin)
+//Registrar personal
+routes.post('/login',loginAuth,loginUsuario)
 
-//Registrar usuario
-routes.post('/registrar',userValidator,registerUser)
+//Registrar personal/usuario
+routes.post('/registrar',userValidator,registrarUsuario)
 
 export default routes;
