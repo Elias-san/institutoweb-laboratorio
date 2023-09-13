@@ -1,7 +1,28 @@
 
-# Documentación de la API REST
+# Documentación de la API REST Backend Laboratorio Don Bosco
 
+### Login Usuario
+Endpoint: POST /paciente/login
 
+Verifica usuario y contraseña registrado en la Base de Datos
+
+* Parámetros de solicitud:
+   
+    {
+       
+        "usuario":"ejemplo@correo.com",
+        "clave":"lab333350291"
+    }
+
+* Respuesta existosa
+    + "Bienvenido usuario X"
+
+* Errores  
+    + Validación de campos correctos
+    + Formato de email correcto
+    + Logintud de clave correcta
+    + Validacion Email existente    
+    + Validación de clave registrada correcta
 
 ### Crear Usuario
 Endpoint: POST /personal/registrar
@@ -11,6 +32,7 @@ Crea un nuevo usuario en el sistema.
 * Parámetros de solicitud:
 
     {
+       
         "nombres":"Jorge",
         "apellidos":"Aguirre",
         "dni":"23255897",
@@ -22,7 +44,7 @@ Crea un nuevo usuario en el sistema.
     }
 
 * Respuesta existosa
-    + "Se ha ingersado un nuevo usuario"
+    + "Se ha ingresado un nuevo usuario"
 
 * Errores  
     + Validación de campos correctos
@@ -44,6 +66,7 @@ Registra un nuevo paciente en el sistema.
 * Parámetros de solicitud:
 
     {
+        
         "nombres":"Pedro",
         "apellidos":"Aguirre",
         "dni":"21558698",
