@@ -30,7 +30,21 @@ const registrarPaciente = async (req,res)=>{
     }
     
 }
-const listarPacientes = (req,res)=>{
+const listarPacientes = async (req,res)=>{
+    try {
+        const pacientes = await Paciente.findAll();
+        if (pacientes){
+          return res
+          .status(200)
+          .json({ pacientes });
+        } else {
+          return res
+          .status(400)
+          .json({ error: true, message: "No hay registros de pacientes" });
+        }
+      } catch (error) {
+        res.json(error);
+      }
 
 }
 

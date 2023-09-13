@@ -21,6 +21,26 @@ const registrarUsuario = async (req, res) => {
     res.json(error);
   }
 };
+
+//Listar Usuarios
+const listarUsuarios = async (req, res) => {
+  
+  try {
+    const usuarios = await Usuario.findAll();
+    if (usuarios){
+      return res
+      .status(200)
+      .json({ usuarios });
+    } else {
+      return res
+      .status(400)
+      .json({ error: true, message: "No hay registros del personal" });
+    }
+  } catch (error) {
+    res.json(error);
+  }
+};
+
 const loginUsuario = async (req, res) => {
   const { usuario, clave } = req.body;
 
@@ -52,4 +72,4 @@ const loginUsuario = async (req, res) => {
   }
 };
 
-export { registrarUsuario, loginUsuario };
+export { registrarUsuario, loginUsuario,listarUsuarios };

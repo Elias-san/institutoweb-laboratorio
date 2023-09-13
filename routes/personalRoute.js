@@ -1,13 +1,10 @@
 import express from "express";
-import  { loginUsuario,registrarUsuario} from "../controller/userController.js"
+import  { loginUsuario,registrarUsuario,listarUsuarios} from "../controller/userController.js"
 import userValidator from '../middleware/userValidator.js'
 import loginAuth from "../middleware/loginAuth.js";
 
 const routes = express.Router()
 
-routes.get('/',(req,res)=>{
-    res.json({url:'Usuario'})
-})
 routes.get('/login',(req,res)=>{
     res.send('Login Usuario/Personal')
 })
@@ -17,5 +14,8 @@ routes.post('/login',loginAuth,loginUsuario)
 
 //Registrar personal/usuario
 routes.post('/registrar',userValidator,registrarUsuario)
+
+//Listar personal
+routes.get('/listado',listarUsuarios)
 
 export default routes;
